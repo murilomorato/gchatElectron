@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, Notification, nativeImage } = require('electron');
+const { app, BrowserWindow, ipcMain, Notification, nativeImage, shell } = require('electron');
 const path = require('path');
 
 let notificationSent = false;
@@ -19,10 +19,21 @@ function createWindow() {
     // win.webContents.openDevTools(); // Abrir devtools
     app.dock.show();
 
-    // Limpa o badge e reseta notificacao quando a janela é focada
+    // Quando receber focus, limpa o badge e reseta notificacao
     win.on('focus', () => {
         app.dock.setBadge('');
         notificationSent = false;
+    });
+
+    // Quando precisar abrir nova janela, ir para browser default do s.o
+    win.webContents.on('new-window', (event, url) => {
+        event.preventDefault();
+        shell.openExternal(url);
+    });
+
+    win.webContents.setWindowOpenHandler(({ url }) => {
+        shell.openExternal(url);
+        return { action: 'deny' };
     });
 }
 

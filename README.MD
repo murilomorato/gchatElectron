@@ -1,4 +1,4 @@
-# Google Chat Desktop Application
+# Google Chat MacOS Desktop Application
 
 Esta é uma aplicação desktop para o Google Chat, criada utilizando Electron. A aplicação carrega o Google Chat em uma janela dedicada sem as barras de navegação, permitindo uma experiência semelhante à de um aplicativo nativo. Além disso, a aplicação monitora mudanças no favicon para detectar novas mensagens e exibe notificações e badges no ícone do Dock.
 
